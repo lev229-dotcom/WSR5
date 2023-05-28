@@ -1,0 +1,63 @@
+﻿<Window x:Class="WSR5.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WSR5"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800" FontFamily="Comic Sans MS">
+    <Window.Resources>
+        <sys:String x:Key="NullImage">
+            pack://application:,,,/Resources/picture.png
+        </sys:String>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Canvas Grid.Row="0">
+            <Button Style="{StaticResource mainBtn}" Content="tEST"/>
+            <ComboBox SelectionChanged="Manufacture_SelectionChanged" Name="Manufacture" Height="40" Width="229" Canvas.Left="10" Canvas.Top="45" ></ComboBox>
+        </Canvas>
+        <ListView Grid.Row="1" x:Name="ListTours" HorizontalAlignment="Center" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListTours_SelectionChanged">
+            <ListView.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <WrapPanel>
+
+                    </WrapPanel>
+                </ItemsPanelTemplate>
+            </ListView.ItemsPanel>
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <Border BorderThickness="1" BorderBrush="Black">
+                        <Grid Width="600" Height="150">
+                            
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"></ColumnDefinition>
+                                <ColumnDefinition Width="3*"></ColumnDefinition>
+                                <ColumnDefinition Width="1.5*"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Row="1" Grid.Column="0" Source="{Binding PhotoPath, FallbackValue={StaticResource NullImage}}" HorizontalAlignment="Center" VerticalAlignment="Center"></Image>
+                            <StackPanel Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Top">
+                                <TextBlock Text="{Binding ProductName}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock  Text="{Binding ProductDescription}" TextWrapping="Wrap"></TextBlock>
+                                <TextBlock  Text="{Binding ProductManufacturer}" ></TextBlock>
+                                <TextBlock  Text="{Binding ProductCost}"></TextBlock>
+                            </StackPanel>
+                            <TextBlock Grid.Column="2" Text="{Binding IsYesOnSklad}" HorizontalAlignment="Left" VerticalAlignment="Center"></TextBlock>
+
+
+
+                            <!--<UniformGrid Grid.Row="3" Rows="1" Columns="2">
+                                <TextBlock Text="{Binding State}" Foreground="{Binding colorBrush}" HorizontalAlignment="Center" VerticalAlignment="Center"></TextBlock>
+                                <TextBlock Text="{Binding FullTicketCount}" VerticalAlignment="Center" HorizontalAlignment="Center"></TextBlock>
+                            </UniformGrid>-->
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </Grid>
+</Window>
